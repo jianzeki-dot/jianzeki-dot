@@ -4,13 +4,14 @@
 
 ## 当前项目
 
-### [comfyui-ki-nodes](https://github.com/jianzeki-dot/comfyui-ki-nodes) · 19 个 ComfyUI 自定义节点合集
+### [comfyui-ki-nodes](https://github.com/jianzeki-dot/comfyui-ki-nodes) · 24 个 ComfyUI 自定义节点合集
 
 把 9 个独立插件合并成一包，节点 ID 与前端扩展名全部保持不变，旧工作流不用重连。零 pip 依赖，只用 ComfyUI 自带环境。
 
 | 方向 | 节点 | 做了什么 |
 |---|---|---|
-| **H3 音视频** | `ki_MiniMaxH3ReferenceToVideo`<br>`ki_MiniMaxH3LongVideoContinuation` | 按短边分级的参考图尺寸；把上一段 latent 尾部按 17k+5 时间网格钉到新片段开头，实现长视频续接 |
+| **H3 音视频** | `ki_MiniMaxH3ReferenceToVideo`<br>`ki_MiniMaxH3LongVideoContinuation`<br>`ki_MiniMaxH3JoinMatch`<br>`ki_MiniMaxH3RefModImages` | 按短边分级的参考图尺寸；把上一段 latent 尾部按 17k+5 时间网格钉到新片段开头实现长视频续接；接缝匹配求前后段最佳接合点；RefMod 批量参考图挑选 |
+| **H3 尾部 latent** | `ki_MiniMaxH3SaveTailLatent`<br>`ki_MiniMaxH3LoadTailLatent`<br>`ki_MiniMaxH3VideoToTailLatent` | 尾部 latent 落盘 / 读回 / 从成品视频裁剪重建，续接链路可跨会话复用 |
 | **显存管理** | `ki_H3_Force_RAM_Offload`<br>`ki_Force_Ref_Evict` | 分 5 档强度强制模型回退系统内存，避免 VRAM>95% 时 GPU stall |
 | **采样加速** | `KiZImageBoost` | 拦截 `DIFFUSION_MODEL`，用最小二乘轨迹外推替代可跳过的采样步，被跳步不产生前向计算 |
 | **渐进采样** | `KiSelfLiftH3Sampler`<br>`KiSelfLiftImageSampler` | 低分辨率前缀 + Artifact-Aware Consistency Lift + 重新加噪，全分辨率续跑 |
